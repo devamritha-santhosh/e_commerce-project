@@ -31,224 +31,394 @@ st.set_page_config(
 )
 
 # -----------------------------------------------------------------------------
-# 2. CUSTOM CSS STYLING (APPLE-INSPIRED MINIMALISM & ENTERPRISE POLISH)
+# 2. CUSTOM CSS STYLING (APPLE-INSPIRED MINIMALISM & HIGH-CONTRAST PALETTE)
 # -----------------------------------------------------------------------------
 CUSTOM_CSS = """
 <style>
 /* Base typography and clean layout */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-html, body, [class*="css"] {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: #0F172A;
+/* Force Light Theme Variables & High Contrast Base */
+:root {
+    --text-color: #14213D !important;
+    --primary-color: #2563EB !important;
+    --background-color: #F8FAFC !important;
+    --secondary-background-color: #FFFFFF !important;
 }
 
-/* Background refinement */
-.stApp {
-    background-color: #F8FAFC;
+html, body, [class*="css"], .stApp {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    background-color: #F8FAFC !important;
+    color: #14213D !important;
 }
 
-/* Header Container */
+/* Ensure all generic text elements default to high-contrast dark tones */
+p, span, label, div, li, a {
+    color: #14213D;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #14213D !important;
+    font-weight: 700 !important;
+}
+
+/* -------------------------------------------------------------------------
+   SIDEBAR STYLING (#333333 for headings, labels, and descriptions)
+   ------------------------------------------------------------------------- */
+section[data-testid="stSidebar"] {
+    background-color: #FFFFFF !important;
+    border-right: 1px solid #E2E8F0 !important;
+}
+
+/* Sidebar Headings */
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] h4,
+section[data-testid="stSidebar"] h5,
+section[data-testid="stSidebar"] h6,
+section[data-testid="stSidebar"] .stMarkdown h1,
+section[data-testid="stSidebar"] .stMarkdown h2,
+section[data-testid="stSidebar"] .stMarkdown h3,
+section[data-testid="stSidebar"] .stMarkdown strong {
+    color: #333333 !important;
+    font-weight: 700 !important;
+}
+
+/* Sidebar Filter Labels */
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] label p,
+section[data-testid="stSidebar"] label span,
+section[data-testid="stSidebar"] [data-testid="stWidgetLabel"],
+section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p,
+section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] span {
+    color: #333333 !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+}
+
+/* Sidebar Descriptions and Captions */
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] .stCaption,
+section[data-testid="stSidebar"] .stCaption p,
+section[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p,
+section[data-testid="stSidebar"] small {
+    color: #333333 !important;
+    font-size: 0.825rem !important;
+}
+
+/* Sidebar Input Text Visibility */
+section[data-testid="stSidebar"] [data-baseweb="select"] div,
+section[data-testid="stSidebar"] [data-baseweb="input"] input,
+section[data-testid="stSidebar"] input {
+    color: #14213D !important;
+    background-color: #FFFFFF !important;
+}
+
+/* Selected multiselect pill tags in sidebar */
+section[data-testid="stSidebar"] [data-baseweb="tag"] {
+    background-color: #E2E8F0 !important;
+}
+section[data-testid="stSidebar"] [data-baseweb="tag"] span {
+    color: #14213D !important;
+    font-weight: 600 !important;
+}
+
+/* Sidebar Checkbox text */
+section[data-testid="stSidebar"] [data-testid="stCheckbox"] label span {
+    color: #333333 !important;
+    font-weight: 500 !important;
+}
+
+/* Sidebar Button */
+section[data-testid="stSidebar"] button {
+    border-radius: 8px !important;
+    border: 1px solid #CBD5E1 !important;
+    font-weight: 600 !important;
+    color: #333333 !important;
+    background-color: #F8FAFC !important;
+}
+section[data-testid="stSidebar"] button:hover {
+    background-color: #F1F5F9 !important;
+    color: #2563EB !important;
+    border-color: #93C5FD !important;
+}
+
+/* -------------------------------------------------------------------------
+   MAIN HEADER CONTAINER (Dark Navy #14213D Title)
+   ------------------------------------------------------------------------- */
 .header-container {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 16px;
-    padding: 24px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 16px !important;
+    padding: 24px 32px !important;
+    margin-bottom: 24px !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04) !important;
 }
 
 .header-title {
-    font-size: 2.1rem;
-    font-weight: 700;
-    color: #0F172A;
-    letter-spacing: -0.025em;
-    margin: 0;
-    line-height: 1.2;
+    font-size: 2.1rem !important;
+    font-weight: 700 !important;
+    color: #14213D !important; /* Requirement 1: Dark Navy #14213D */
+    letter-spacing: -0.025em !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
 }
 
 .header-subtitle {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #2563EB;
-    margin-top: 6px;
-    margin-bottom: 4px;
-    letter-spacing: -0.01em;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: #1D4ED8 !important; /* Deep Blue Accent */
+    margin-top: 6px !important;
+    margin-bottom: 4px !important;
+    letter-spacing: -0.01em !important;
 }
 
 .header-tagline {
-    font-size: 0.85rem;
-    color: #64748B;
-    margin: 0;
+    font-size: 0.85rem !important;
+    color: #334155 !important; /* High contrast Dark Slate */
+    margin: 0 !important;
+    font-weight: 500 !important;
 }
 
-/* Section Header Dividers */
+/* -------------------------------------------------------------------------
+   SECTION HEADERS
+   ------------------------------------------------------------------------- */
 .section-header {
-    margin-top: 32px;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #E2E8F0;
+    margin-top: 32px !important;
+    margin-bottom: 16px !important;
+    padding-bottom: 8px !important;
+    border-bottom: 1px solid #E2E8F0 !important;
 }
 
 .section-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #0F172A;
-    letter-spacing: -0.02em;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    color: #14213D !important;
+    letter-spacing: -0.02em !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
 }
 
 .section-desc {
-    font-size: 0.85rem;
-    color: #64748B;
-    margin: 4px 0 0 0;
+    font-size: 0.85rem !important;
+    color: #334155 !important;
+    margin: 4px 0 0 0 !important;
+    font-weight: 500 !important;
 }
 
-/* KPI Card Cards */
+/* -------------------------------------------------------------------------
+   KPI CARDS
+   ------------------------------------------------------------------------- */
 .kpi-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 14px;
-    padding: 18px 20px;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    height: 100%;
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 14px !important;
+    padding: 18px 20px !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04) !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+    height: 100% !important;
 }
 
 .kpi-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -4px rgba(0, 0, 0, 0.04) !important;
 }
 
 .kpi-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #64748B;
-    margin-bottom: 6px;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    color: #334155 !important; /* Clear dark slate */
+    margin-bottom: 6px !important;
 }
 
 .kpi-value {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #0F172A;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: 4px;
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
+    color: #14213D !important; /* Solid dark navy */
+    letter-spacing: -0.03em !important;
+    line-height: 1.1 !important;
+    margin-bottom: 4px !important;
 }
 
 .kpi-subtext {
-    font-size: 0.75rem;
-    color: #94A3B8;
-    margin: 0;
+    font-size: 0.75rem !important;
+    color: #475569 !important; /* Readable dark grey-slate */
+    font-weight: 500 !important;
+    margin: 0 !important;
 }
 
-/* Insight Cards */
+/* -------------------------------------------------------------------------
+   INSIGHT CARDS
+   ------------------------------------------------------------------------- */
 .insight-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin-bottom: 12px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-    border-left: 4px solid #2563EB;
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 12px !important;
+    padding: 16px 20px !important;
+    margin-bottom: 12px !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03) !important;
+    border-left: 4px solid #2563EB !important;
 }
 
 .insight-card.teal {
-    border-left-color: #0D9488;
+    border-left-color: #0D9488 !important;
 }
 
 .insight-card.navy {
-    border-left-color: #1E3A8A;
+    border-left-color: #14213D !important;
 }
 
 .insight-card.purple {
-    border-left-color: #6366F1;
+    border-left-color: #4F46E5 !important;
 }
 
 .insight-title {
-    font-size: 0.825rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #475569;
-    margin-bottom: 4px;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: #14213D !important;
+    margin-bottom: 4px !important;
 }
 
 .insight-content {
-    font-size: 0.95rem;
-    color: #0F172A;
-    font-weight: 500;
-    line-height: 1.45;
-    margin: 0;
+    font-size: 0.95rem !important;
+    color: #1E293B !important;
+    font-weight: 500 !important;
+    line-height: 1.45 !important;
+    margin: 0 !important;
+}
+
+.insight-content b {
+    color: #14213D !important;
+    font-weight: 700 !important;
 }
 
 .insight-detail {
-    font-size: 0.8rem;
-    color: #64748B;
-    margin-top: 4px;
-    margin-bottom: 0;
+    font-size: 0.8rem !important;
+    color: #334155 !important;
+    margin-top: 4px !important;
+    margin-bottom: 0 !important;
+    font-weight: 500 !important;
 }
 
-/* Chart Container Cards */
-.chart-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 24px;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
-}
-
+/* -------------------------------------------------------------------------
+   CHART HEADERS
+   ------------------------------------------------------------------------- */
 .chart-header {
-    margin-bottom: 14px;
+    margin-bottom: 14px !important;
 }
 
 .chart-title {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: #0F172A;
-    letter-spacing: -0.01em;
-    margin: 0;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: #14213D !important;
+    letter-spacing: -0.01em !important;
+    margin: 0 !important;
 }
 
 .chart-desc {
-    font-size: 0.8rem;
-    color: #64748B;
-    margin: 2px 0 0 0;
+    font-size: 0.825rem !important;
+    color: #334155 !important;
+    margin: 2px 0 0 0 !important;
+    font-weight: 500 !important;
 }
 
-/* Sidebar Styling */
-section[data-testid="stSidebar"] {
-    background-color: #FFFFFF;
-    border-right: 1px solid #E2E8F0;
-}
-
-/* Tag / Badge Pills */
+/* -------------------------------------------------------------------------
+   PILLS & BADGES
+   ------------------------------------------------------------------------- */
 .pill {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    background-color: #EFF6FF;
-    color: #1D4ED8;
-    margin-right: 6px;
-    margin-bottom: 6px;
+    display: inline-block !important;
+    padding: 4px 11px !important;
+    border-radius: 9999px !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    background-color: #EFF6FF !important;
+    color: #1D4ED8 !important;
+    margin-right: 6px !important;
+    margin-bottom: 6px !important;
+    border: 1px solid #BFDBFE !important;
 }
 
 .pill-teal {
-    background-color: #F0FDFA;
-    color: #0F766E;
+    background-color: #F0FDFA !important;
+    color: #0F766E !important;
+    border-color: #99F6E4 !important;
 }
 
 .pill-gray {
-    background-color: #F1F5F9;
-    color: #475569;
+    background-color: #F1F5F9 !important;
+    color: #334155 !important;
+    border-color: #CBD5E1 !important;
+}
+
+/* -------------------------------------------------------------------------
+   EXPANDERS & INTERACTIVE CONTROLS
+   ------------------------------------------------------------------------- */
+[data-testid="stExpander"] {
+    background-color: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 12px !important;
+}
+
+[data-testid="stExpander"] details summary span {
+    color: #14213D !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+}
+
+[data-testid="stExpander"] details p,
+[data-testid="stExpander"] details li {
+    color: #333333 !important;
+}
+
+[data-testid="stExpander"] details h4 {
+    color: #14213D !important;
+    font-weight: 700 !important;
+}
+
+/* Main content inputs & search bar */
+input[type="text"] {
+    color: #14213D !important;
+    background-color: #FFFFFF !important;
+}
+
+/* Captions in main view */
+.stCaption, .stCaption p, [data-testid="stCaptionContainer"] p {
+    color: #475569 !important;
+    font-size: 0.85rem !important;
+}
+
+/* Download button */
+[data-testid="stDownloadButton"] button {
+    background-color: #2563EB !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: 8px !important;
+}
+[data-testid="stDownloadButton"] button:hover {
+    background-color: #1D4ED8 !important;
+    color: #FFFFFF !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 16px 20px !important;
+    }
+    .header-title {
+        font-size: 1.6rem !important;
+    }
+    .kpi-value {
+        font-size: 1.4rem !important;
+    }
 }
 
 /* Hide default streamlit decorations */
@@ -569,11 +739,11 @@ col_banner_1, col_banner_2 = st.columns([3, 1])
 with col_banner_1:
     tag_html = " ".join([f'<span class="pill">{tag}</span>' for tag in active_filter_tags])
     if active_filter_tags:
-        st.markdown(f"**Active Filters:** {tag_html}", unsafe_allow_html=True)
+        st.markdown(f"<span style='color: #14213D; font-weight: 700;'>Active Filters:</span> {tag_html}", unsafe_allow_html=True)
     else:
-        st.markdown("**Active Filters:** <span class='pill pill-gray'>Showing All Unfiltered Records</span>", unsafe_allow_html=True)
+        st.markdown("<span style='color: #14213D; font-weight: 700;'>Active Filters:</span> <span class='pill pill-gray'>Showing All Unfiltered Records</span>", unsafe_allow_html=True)
 with col_banner_2:
-    st.markdown(f"<div style='text-align: right; color: #64748B; font-size: 0.85rem; padding-top: 4px;'><b>{current_rows:,}</b> of <b>{total_raw_rows:,}</b> orders ({pct_active:.1f}%)</div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='text-align: right; color: #333333; font-size: 0.85rem; font-weight: 600; padding-top: 4px;'><b>{current_rows:,}</b> of <b>{total_raw_rows:,}</b> orders ({pct_active:.1f}%)</div>", unsafe_allow_html=True)
 
 
 # -----------------------------------------------------------------------------
@@ -773,15 +943,15 @@ st.markdown("<div style='margin-bottom: 24px;'></div>", unsafe_allow_html=True)
 # -----------------------------------------------------------------------------
 # 10. PLOTLY THEME & COLOR PALETTE UTILITY
 # -----------------------------------------------------------------------------
-PLOT_FONT = dict(family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif", size=12, color="#0F172A")
-NAVY_PALETTE = ["#1E3A8A", "#2563EB", "#0D9488", "#0284C7", "#6366F1", "#059669", "#D97706", "#475569"]
+PLOT_FONT = dict(family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif", size=12, color="#14213D")
+NAVY_PALETTE = ["#1E3A8A", "#2563EB", "#0D9488", "#0284C7", "#6366F1", "#059669", "#D97706", "#333333"]
 
 def apply_sleek_layout(fig, title="", height=400):
     """Applies Apple-level minimalism and enterprise clean aesthetics to Plotly figures."""
     fig.update_layout(
         title=dict(
             text=f"<b>{title}</b>" if title else "",
-            font=dict(size=14, color="#0F172A", family="Inter, sans-serif"),
+            font=dict(size=14, color="#14213D", family="Inter, sans-serif"),
             x=0.01,
             y=0.96
         ),
@@ -791,7 +961,7 @@ def apply_sleek_layout(fig, title="", height=400):
         plot_bgcolor="rgba(0,0,0,0)",
         font=PLOT_FONT,
         hoverlabel=dict(
-            bgcolor="#0F172A",
+            bgcolor="#14213D",
             font_size=12,
             font_color="#FFFFFF",
             font_family="Inter, sans-serif"
@@ -802,22 +972,22 @@ def apply_sleek_layout(fig, title="", height=400):
             y=1.02,
             xanchor="right",
             x=1,
-            font=dict(size=11, color="#475569")
+            font=dict(size=11, color="#333333")
         )
     )
     fig.update_xaxes(
         showgrid=True,
-        gridcolor="#F1F5F9",
+        gridcolor="#E2E8F0",
         linecolor="#CBD5E1",
-        tickfont=dict(color="#475569", size=11),
-        title_font=dict(color="#0F172A", size=12, weight=600)
+        tickfont=dict(color="#333333", size=11),
+        title_font=dict(color="#14213D", size=12, weight=600)
     )
     fig.update_yaxes(
         showgrid=True,
-        gridcolor="#F1F5F9",
+        gridcolor="#E2E8F0",
         linecolor="#CBD5E1",
-        tickfont=dict(color="#475569", size=11),
-        title_font=dict(color="#0F172A", size=12, weight=600)
+        tickfont=dict(color="#333333", size=11),
+        title_font=dict(color="#14213D", size=12, weight=600)
     )
     return fig
 
@@ -1039,7 +1209,7 @@ else:
         fig_scatter.update_xaxes(title="Unit Price")
         fig_scatter.update_yaxes(title="Sales")
         st.plotly_chart(fig_scatter, use_container_width=True)
-        st.markdown(f"<div style='font-size: 0.75rem; color: #64748B;'>{scatter_note}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='font-size: 0.75rem; color: #334155; font-weight: 500;'>{scatter_note}</div>", unsafe_allow_html=True)
 
 
     # =========================================================================
@@ -1141,9 +1311,9 @@ else:
         )
         apply_sleek_layout(fig_donut, height=420)
         fig_donut.add_annotation(
-            text=f"<b>{current_rows:,}</b><br><span style='font-size:10px; color:#64748B;'>Transactions</span>",
+            text=f"<b>{current_rows:,}</b><br><span style='font-size:10px; color:#333333; font-weight:600;'>Transactions</span>",
             x=0.5, y=0.5,
-            font=dict(size=14, color="#0F172A", family="Inter, sans-serif"),
+            font=dict(size=14, color="#14213D", family="Inter, sans-serif"),
             showarrow=False
         )
         st.plotly_chart(fig_donut, use_container_width=True)
@@ -1311,7 +1481,7 @@ else:
             zmax=1.0,
             text=np.round(corr_df.values, 2),
             texttemplate="%{text:.2f}",
-            textfont=dict(size=12, color="#0F172A", family="Inter, sans-serif"),
+            textfont=dict(size=12, color="#14213D", family="Inter, sans-serif"),
             hoverongaps=False,
             hovertemplate="<b>%{x}</b> vs <b>%{y}</b><br>Correlation: <b>%{z:.3f}</b><extra></extra>",
             colorbar=dict(
@@ -1442,7 +1612,7 @@ with st.expander("ℹ️ Academic Project Documentation & Methodology (About)", 
         """)
 
 st.markdown("""
-<div style="text-align: center; color: #64748B; font-size: 0.85rem; padding: 24px 0 12px 0;">
+<div style="text-align: center; color: #334155; font-size: 0.85rem; padding: 24px 0 12px 0; font-weight: 500;">
     College Data Analytics Microproject | E-Commerce Sales Data Analysis (EDA) | Local Environment Deployment
 </div>
 """, unsafe_allow_html=True)
